@@ -3,26 +3,29 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
     <title>Document</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   </head>
   <body>
     <div id="app">
-      <p>
-        <input type="text" v-model="greeting" />
-      </p>
-      <p>{{ greeting }} ({{greeting.length}})</p>
+      <button
+        :class="active? 'button-active' : 'button-inactive'"
+        v-on:click="toggle"
+      >
+        {{ active? 'On' : 'Off' }}
+      </button>
     </div>
 
     <script>
       Vue.createApp({
         data() {
-          return { greeting: "Hello Word" };
+          return { buttonClasses: "text-green", active: false };
         },
-        mounted() {
-          setTimeout(() => {
-            this.greeting = "changed";
-          }, 3000);
+        methods: {
+          toggle() {
+            this.active = !this.active;
+          },
         },
       }).mount("#app");
     </script>
